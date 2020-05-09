@@ -1,0 +1,29 @@
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  background-image: url(bg.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #464646;
+}
+.container {
+  padding: 150px;
+}
+.formContainer input {
+  display: block;
+  border-style: none;
+  padding: 10px;
+  width: 100%;
+  height: 1.2rem;
+  margin-bottom: 1.3rem;
+  border-radius: 0.2rem;
+  font-size: 1.5rem;
+  box-shadow: 5px 10px 10px 5px #b6b6b6;
+}
