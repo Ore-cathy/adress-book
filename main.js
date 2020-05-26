@@ -5,85 +5,95 @@ const phoneInput = document.querySelector(".phone-input");
 const saveButton = document.querySelector(".save-button");
 const contactList = document.querySelector(".contact-list");
 const filterOption = document.querySelector(".filter-contact");
+const msgDiv = document.querySelector(".msgdiv");
+const container = document.querySelector(".container");
 
-//event listeners
-saveButton.addEventListener("click", addContact);
-// contactList.addEventListener("click", deleteCheck);
-// filterOption.addEventListener("change", filterContact);
+const PromptName = prompt("enter your name");
+const promptValue = document.querySelector("h1");
+promptValue.innerHTML = `welcome ${PromptName}, start saving your contacts`;
 
-//functions
-function addContact(event) {
-  event.preventDefault();
+//event listener
 
-  const contactDiv = document.createElement("div");
-  contactDiv.classList.add("contact");
+saveButton.addEventListener("click", (e) => {
+  e.preventDefault();
 
-  let newdetails = {
-    name: nameInput.value,
-    email: emailInput.value,
-    phone: phoneInput.value,
-  };
+  if (
+    nameInput.value === "" &&
+    emailInput.value === "" &&
+    phoneInput.value === ""
+  ) {
+    msgDiv.innerHTML = "Please Fill In the Form Above";
 
-  const newContact = document.createElement("li");
-  newContact.innerText = JSON.stringify(newdetails);
-  newContact.classList.add("contact-item");
-  contactDiv.appendChild(newContact);
+    msgDiv.classList.add("error");
+    setTimeout(() => msgDiv.remove(), 5000);
+  } else if (nameInput.value === "") {
+    msgDiv.innerHTML = "please enter  a name";
+    nameInput.style.borderColor = "red";
+    msgDiv.classList.add("error");
+    setTimeout(() => msgDiv.remove(), 5000);
+    nameInput.addEventListener("click", () => {
+      nameInput.style.borderColor = "";
+    });
+  } else if (emailInput.value === "") {
+    msgDiv.textContent = "please enter  an email address";
+    emailInput.style.borderColor = "red";
+    msgDiv.classList.add("error");
+    setTimeout(() => msgDiv.remove(), 5000);
+    emailInput.addEventListener("click", () => {
+      emailInput.style.borderColor = "";
+    });
+  } else if (phoneInput.value === "") {
+    msgDiv.textContent = "please enter  a phone number";
+    phoneInput.style.borderColor = "red";
+    msgDiv.classList.add("error");
+    setTimeout(() => msgDiv.remove(), 5000);
+    phoneInput.addEventListener("click", () => {
+      phoneInput.style.borderColor = "";
+    });
+  } else {
+    document.querySelector("table").style.marginTop = "0px";
 
-  contactList.appendChild(contactDiv);
-  newdetails.value = "";
+    let tr = document.createElement("tr");
 
-  //   let str = JSON.stringify(newcontact);
-  //   console.log(newcontact);
-  //   contactList.innerText = str;
+    let td = document.createElement("td");
+    td.appendChild(document.createTextNode(nameInput.value));
+    container.appendChild(document.querySelector("table"));
+    document
+      .querySelector("table")
+      .appendChild(document.querySelector("tbody"));
+    document.querySelector("tbody").appendChild(tr);
+    tr.appendChild(td);
 
-  //   const completedButton = document.createElement("button");
-  //   completedButton.innerHTML = "<i class='fa fa-check'></i>";
-  //   completedButton.classList.add("complete-btn");
-  //   contactDiv.appendChild(completedButton);
+    let td1 = document.createElement("td");
+    td1.appendChild(document.createTextNode(phoneInput.value));
+    container.appendChild(document.querySelector("table"));
+    document
+      .querySelector("table")
+      .appendChild(document.querySelector("tbody"));
+    document.querySelector("tbody").appendChild(tr);
+    tr.appendChild(td1);
 
-  //   const trashButton = document.createElement("button");
-  //   trashButton.innerHTML = "<i class='fa fa-trash'></i>";
-  //   trashButton.classList.add("trash-btn");
-  //   contactDiv.appendChild(trashButton);
-}
+    let td2 = document.createElement("td");
+    td2.appendChild(document.createTextNode(emailInput.value));
+    container.appendChild(document.querySelector("table"));
+    document
+      .querySelector("table")
+      .appendChild(document.querySelector("tbody"));
+    document.querySelector("tbody").appendChild(tr);
+    tr.appendChild(td2);
 
-// function deleteCheck(e) {
-//   const item = e.target;
-//   if (item.classList[0] === "tr  ash-btn") {
-//     const contact = item.parentElement;
-//     contact.classList.add("fall");
-//     contact.addEventListener("transitionend", function () {
-//       contact.remove();
-//     });
-//   }
-//   if (item.classList[0] === "complete-btn") {
-//     const contact = item.parentElement;
-//     contact.classList.toggle("completed");
-//   }
-// }
-// function filterContact(e) {
-//   const contacts = contactList.childNodes;
-//   contacts.forEach(function (contact) {
-//     console.log(contact, e.target.value);
-//     switch (e.target.value) {
-//       case "all":
-//         contact.style.display = "flex";
-//         break;
-//       case "completed":
-//         if (contact.classList.contains("completed")) {
-//           contact.style.display = "flex";
-//         } else {
-//           contact.style.display = "none";
-//         }
-//         break;
-
-//       case "uncompleted":
-//         if (!contact.classList.contains("completed")) {
-//           contact.style.display = "flex";
-//         } else {
-//           contact.style.display = "none";
-//         }
-//         break;
-//     }
-//   });
-// }
+    //adding the delete button
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("delete_btn");
+    deleteButton.classList.add("btn-danger");
+    tr.appendChild(deleteButton);
+  }
+});
+// removing contact
+container.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target.classList.contains("btn-danger")) {
+    e.target.parentElement.remove();
+  }
+});

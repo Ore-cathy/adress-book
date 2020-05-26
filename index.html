@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
+    <div class="adress-container">
       <h1>My Adress Book</h1>
       <div class="formContainer">
+        <p class="msgdiv"></p>
         <form action="">
           <label for="name">Name</label>
           <input type="text" class="name-input" name="" id="" />
@@ -20,11 +21,30 @@
         </form>
       </div>
       <button type="submit" class="save-button">save</button>
-    </div>
 
-    <div class="contact-container">
-      <p class="contact-list"></p>
+      <!--tables-->
+      <div class="container">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Delete Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr scope="row">
+              <!-- <td>ore cathy</td>
+              <td>08099538890</td>
+              <td>ibadan</td> 
+              <td><button class="btn btn-danger ">Delete</button></td>
+              </tr> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <script src="main.js"></script>
     </div>
-    <script src="main.js"></script>
   </body>
 </html>
